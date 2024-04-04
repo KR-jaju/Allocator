@@ -4,13 +4,22 @@
 #include <cstdint>
 #include <cstddef>
 #include <bitset>
+#include <cmath>
 
 template <std::size_t l, std::size_t u>
 class Allocator {
 public:
-	Allocator(void *pool): pool((unsigned char *)pool), free_tree(2), allocated(0) {}
-	void	*allocate(std::size_t exp) {
-		return (fetchBlock(1, exp));
+	Allocator(void *pool): pool(static_cast<unsigned char *>(pool)), free_tree(2), allocated(0) {}
+	void	*allocate(std::size_t size) {
+		std::size_t	exp = 0;
+		size -= 1;
+		while (size) {
+			size >>= 1;
+			++exp;
+		}
+		if (exp > u)
+			return (nullptr);
+		return (fetchBlock(1, std::max(exp, l)));
 	}
 	void	free(void *ptr) {
 		std::size_t	idx = this->fetchAllocatedBlock(static_cast<unsigned char *>(ptr));

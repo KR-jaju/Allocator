@@ -6,11 +6,11 @@ int	main(void) {
 	char	pool[256];
 	Allocator<2, 8>	a(pool);
 
-	void	*ptr1 = a.allocate(5);
-	void	*ptr2 = a.allocate(5);
+	void	*ptr1 = a.allocate(30);
+	void	*ptr2 = a.allocate(30);
 	a.free(ptr1);
 	a.free(ptr2);
-	void	*ptr3 = a.allocate(6);
+	void	*ptr3 = a.allocate(64);
 
 	std::cout << ptr1 << std::endl;
 	std::cout << ptr2 << std::endl;

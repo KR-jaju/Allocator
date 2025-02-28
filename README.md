@@ -69,3 +69,6 @@ int main(void) {
 ## Notes
 + **No Thread Safety**: **Allocator** is not thread-safe. If you require concurrency, you must implement your own synchronization mechanisms.
 + **Internal Fragmentation**: The buddy system may still suffer from internal fragmentation, particularly when the allocated block is significantly larger than the requested size due to the power-of-two splitting rule.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
